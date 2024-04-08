@@ -55,6 +55,9 @@ def compute_performance_slices(feature):
         with open('data_slice_model_metrics.json', 'w') as f:
             json.dump(metrics_dict, f, indent=4)
 
+        with open('slice_output.txt', 'w') as f:
+            f.write(str(metrics_dict))
+
     return metrics_dict
 
 if __name__ == '__main__':
