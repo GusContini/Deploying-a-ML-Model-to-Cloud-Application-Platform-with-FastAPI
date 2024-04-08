@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 # Import functions to be tested
-from model import train_model, compute_model_metrics, inference, import_model
+from model import train_model, compute_model_metrics, inference
 
 # Test if train_model function returns trained model of the expected type
 def test_train_model():

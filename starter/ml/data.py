@@ -41,7 +41,7 @@ def process_data(
         in.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
-        passed in.
+        passed in. 
     """
 
     if label is not None:

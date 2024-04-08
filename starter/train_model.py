@@ -12,15 +12,13 @@ import pickle
 
 # Add code to load in the data.
 #     '\\\\wsl.localhost\\Ubuntu\\home\\chafund\\GIT\\Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI\\data\\census.csv'
-df = pd.read_csv(
-    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/census.csv'
+train = pd.read_csv(
+    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/train.csv'
     )
 
-cols = list(df.columns)
-cols = [col.strip() for col in cols]
-df.columns = cols
-
-train, test = train_test_split(df, test_size=0.20)
+test = pd.read_csv(
+    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/test.csv'
+    )
 
 cat_features = [
     "workclass",
@@ -32,16 +30,16 @@ cat_features = [
     "sex",
     "native-country",
 ]
+
 X_train, y_train, encoder, lb = data.process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
-# Proces the test data with the process_data function.
 X_test, y_test, _, _ = data.process_data(
     test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
 )
-# Train and save a model.
 
+# Train and save a model.
 rf = RandomForestClassifier(
     n_estimators=100,
     max_depth=15,
@@ -55,6 +53,13 @@ rf = RandomForestClassifier(
 )
 
 clf = model.train_model(X_train, y_train, rf)
+
+pred = model.inference(clf, X_test)
+
+precision, recall, fbeta = model.compute_model_metrics(y_test, pred)
+print(f'precision: {precision}')
+print(f'recall: {recall}')
+print(f'fbeta: {fbeta}')
 
 with open('trained_model.pkl', 'wb') as file:
     pickle.dump((clf, encoder, lb), file)
