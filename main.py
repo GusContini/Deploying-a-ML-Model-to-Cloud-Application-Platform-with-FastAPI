@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, conlist
+from typing import List 
+from pydantic import BaseModel, Field
 import pickle
 import sys
 import os
@@ -10,20 +11,20 @@ import model
 app = FastAPI()
 
 class InputData(BaseModel):
-    age: conlist(int, min_items=1, max_items=1)
-    workclass: conlist(str, min_items=1, max_items=1)
-    fnlwgt: conlist(int, min_items=1, max_items=1)
-    education: conlist(int, min_items=1, max_items=1)
-    education-num: conlist(int, min_items=1, max_items=1)
-    marital-status: conlist(str, min_items=1, max_items=1)
-    occupation: conlist(str, min_items=1, max_items=1)
-    relationship: conlist(str, min_items=1, max_items=1)
-    race: conlist(str, min_items=1, max_items=1)
-    sex: conlist(str, min_items=1, max_items=1)
-    capital-gain: conlist(int, min_items=1, max_items=1)
-    capital-loss: conlist(int, min_items=1, max_items=1)
-    hours-per-week: conlist(str, min_items=1, max_items=1)
-    native-country: conlist(str, min_items=1, max_items=1)
+    age: int = Field(examples=[39])
+    workclass: str = Field(examples=["State-gov"])
+    fnlgt: int = Field(examples=[77516])
+    education: str = Field(examples=["Bachelors"])
+    education_num: int = Field(..., alias="education-num", examples=[13])
+    marital_status: str = Field(..., alias="marital-status", examples=["Never-married"])
+    occupation: str = Field(examples=["Adm-clerical"])
+    relationship: str = Field(examples=["Not-in-family"])
+    race: str = Field(examples=["White"])
+    sex: str = Field(examples=["Male"])
+    capital_gain: int = Field(..., alias="capital-gain", examples=[2174])
+    capital_loss: int = Field(..., alias="capital-loss", examples=[0])
+    hours_per_week: int = Field(..., alias="hours-per-week", examples=[40])
+    native_country: str = Field(..., alias="native-country", examples=["United-States"])
 
 # Load trained model
 with open(os.path.join(os.path.dirname(__file__), 'starter', 'trained_model.pkl'), 'rb') as file:
@@ -32,17 +33,25 @@ with open(os.path.join(os.path.dirname(__file__), 'starter', 'trained_model.pkl'
 cat_features = [
     "workclass",
     "education",
-    "marital-status",
+    "marital_status",
     "occupation",
     "relationship",
     "race",
     "sex",
-    "native-country",
+    "native_country",
 ]
 
 def perform_inference(input_data):
+    input_dict = input_data.dict()
+    input_dict['salary'] = '0'
+
     X_processed, _, _, _ = data.process_data(
-        input_data, categorical_features=cat_features, label=None, training=False, encoder=encoder, lb=lb
+        input_dict,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
     predictions = model.inference(trained_model, X_processed)
     return predictions
@@ -54,7 +63,11 @@ async def read_root():
 @app.post('/predict')
 async def predict_income(input_data: InputData):
     try:
-        predictions = perform_inference(input_data.dict())
-        return {'predictions': predictions}
+        predictions = perform_inference(input_data)
+        if predictions==0:
+            pred_label = '<= 50K'
+        else:
+            pred_label = '> 50K'
+        return {'predictions': pred_label}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

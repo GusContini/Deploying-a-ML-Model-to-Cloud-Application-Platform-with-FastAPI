@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import pandas as pd
 
  
 def process_data(
@@ -40,9 +41,15 @@ def process_data(
         Trained OneHotEncoder if training is True, otherwise returns the encoder passed
         in.
     lb : sklearn.preprocessing._label.LabelBinarizer
-        Trained LabelBinarizer if training is True, otherwise returns the binarizer
+        Trained LabelBinarizer if training is True , otherwise returns the binarizer
         passed in. 
     """
+
+    if isinstance(X, dict):
+        X = pd.DataFrame([X])
+        #X.columns = ['age', 'workclass', 'fnlgt', 'education', 'education-num', 'marital-status',
+        # 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
+        # 'hours-per-week', 'native-country']
 
     if label is not None:
         y = X[label]
@@ -67,4 +74,5 @@ def process_data(
             pass
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
+
     return X, y, encoder, lb
