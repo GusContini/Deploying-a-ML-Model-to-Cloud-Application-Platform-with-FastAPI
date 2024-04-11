@@ -68,6 +68,6 @@ async def predict_income(input_data: InputData):
             pred_label = '<= 50K'
         else:
             pred_label = '> 50K'
-        return {'predictions': pred_label}
+        return {'predictions': str(predictions) + pred_label}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
