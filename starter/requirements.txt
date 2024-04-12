@@ -1,0 +1,15 @@
+python==3.8
+argparse
+fastapi
+gunicorn
+importlib
+inspect
+numpy
+pandas
+pickle
+pydantic
+pytest
+requests
+scikit-learn
+typing
+uvicorn
