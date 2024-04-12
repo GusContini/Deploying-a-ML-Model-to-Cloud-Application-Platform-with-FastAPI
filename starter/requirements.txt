@@ -2,7 +2,6 @@ argparse
 fastapi
 gunicorn
 importlib
-inspect
 numpy
 pandas
 pickle
