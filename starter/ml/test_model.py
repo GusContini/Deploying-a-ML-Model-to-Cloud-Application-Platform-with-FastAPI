@@ -1,7 +1,6 @@
-import pytest
+# import pytest
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-import os
 
 # Import functions to be tested
 from model import train_model, compute_model_metrics, inference
