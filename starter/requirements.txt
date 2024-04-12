@@ -1,13 +1,9 @@
-argparse
 fastapi
 gunicorn
-importlib
-numpy
+numpy==1.23
 pandas
-pickle
 pydantic
 pytest
 requests
 scikit-learn
-typing
 uvicorn
