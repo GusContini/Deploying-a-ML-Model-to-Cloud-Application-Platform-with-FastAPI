@@ -33,12 +33,12 @@ def test_inference():
     # Create dummy data
     X_train = np.array([[1, 2], [3, 4]])
     y_train = np.array([0, 1])
-    model = RandomForestClassifier()
-    model.fit(X_train, y_train)  # Train the model
+    clf = RandomForestClassifier()
+    clf.fit(X_train, y_train)  # Train the model
     # Create dummy data for inference
     X = np.array([[1, 2], [3, 4]])
     # Call inference function
-    predictions = model.inference(model, X)
+    predictions = model.inference(clf, X)
     # Assert that predictions is a numpy array
     assert isinstance(predictions, np.ndarray)
 
