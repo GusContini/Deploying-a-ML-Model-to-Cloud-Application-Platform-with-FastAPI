@@ -1,14 +1,18 @@
+''' Docstring
+'''
+
+import pickle
+import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-import pickle
-import sys
-import os
 from starter.ml import data, model
 
 app = FastAPI()
 
 
 class InputData(BaseModel):
+    ''' Docstring
+    '''
     age: int = Field(examples=[39])
     workclass: str = Field(examples=["State-gov"])
     fnlgt: int = Field(examples=[77516])
@@ -51,6 +55,8 @@ cat_features = [
 
 
 def perform_inference(input_data):
+    ''' Docstring
+    '''
     input_dict = input_data.dict()
     input_dict['salary'] = '0'
 
@@ -68,10 +74,14 @@ def perform_inference(input_data):
 
 @app.get('/')
 async def read_root():
+    ''' Docstring
+    '''
     return {'message': 'Welcome to the ML Model Inference API!'}
 
 @app.post('/predict')
 async def predict_income(input_data: InputData):
+    ''' Docstring
+    '''
     try:
         predictions = perform_inference(input_data)
         if predictions==0:

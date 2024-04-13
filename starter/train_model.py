@@ -1,23 +1,19 @@
-# Script to train machine learning model.
-
-# Add the necessary imports for the starter code.
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import pandas as pd
-import sys
-sys.path.append('ml')  # Adiciona o subdiretório X2 ao caminho de busca de módulos
-import data
-import model
+''' Docstring
+'''
 import pickle
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from starter.ml import data, model
 
 # Add code to load in the data.
-#     '\\\\wsl.localhost\\Ubuntu\\home\\chafund\\GIT\\Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI\\data\\census.csv'
 train = pd.read_csv(
-    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/train.csv'
+    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application'
+    '-Platform-with-FastAPI/data/train.csv'
     )
 
 test = pd.read_csv(
-    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/test.csv'
+    '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application'
+    '-Platform-with-FastAPI/data/test.csv'
     )
 
 cat_features = [

@@ -1,3 +1,5 @@
+''' Docstring
+'''
 from os import path
 
 import argparse
@@ -10,8 +12,9 @@ FAIL_COLOR = '\033[91m'
 OK_COLOR = '\033[92m'
 WARN_COLOR = '\033[93m'
 
-
 def run_sanity_check(test_dir):
+    ''' Docstring
+    '''
 
     print('This script will perform a sanity test to ensure '
           'your code meets the criteria in the rubric.\n')
@@ -46,7 +49,6 @@ def run_sanity_check(test_dir):
             test_function_names
             )
         )
-    
 
     print("\n============= Sanity Check Report ===========")
     SANITY_TEST_PASSING = True
@@ -73,7 +75,6 @@ def run_sanity_check(test_dir):
                 TEST_FOR_GET_METHOD_RESPONSE_CODE = True
             if (source.find('.json') != -1) or (source.find('json.loads') != -1):
                 TEST_FOR_GET_METHOD_RESPONSE_BODY =  True
-
 
         if not TEST_FOR_GET_METHOD_RESPONSE_CODE:
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
@@ -108,9 +109,12 @@ def run_sanity_check(test_dir):
         if len(test_functions_for_post) == 1:
             print(f"[{WARNING_COUNT}]")
             WARNING_COUNT += 1
-            print(FAIL_COLOR+"Only one test case was detected for the POST() method.")
-            print(FAIL_COLOR+"Please make sure you have two test cases for the POST() method."+
-            "\nOne test case for EACH of the possible inferences (results/outputs) of the ML model.\n")
+            print(FAIL_COLOR+"Only one test case was detected "
+                  "for the POST() method.")
+            print(FAIL_COLOR+"Please make sure you have two test "
+                  "cases for the POST() method."+
+            "\nOne test case for EACH of the possible inferences "
+            "(results/outputs) of the ML model.\n")
             SANITY_TEST_PASSING = False
 
         for func in test_functions_for_post:
@@ -124,16 +128,19 @@ def run_sanity_check(test_dir):
         if not TEST_FOR_POST_METHOD_RESPONSE_CODE:
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
             WARNING_COUNT += 1
-            print(FAIL_COLOR+"One or more of your test cases for POST() do not seem to be testing the response code.\n")
+            print(FAIL_COLOR+"One or more of your test cases for POST() "
+                  "do not seem to be testing the response code.\n")
         if not TEST_FOR_POST_METHOD_RESPONSE_BODY:
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
             WARNING_COUNT += 1
-            print(FAIL_COLOR+"One or more of your test cases for POST() do not seem to be testing the contents of the response.\n")
+            print(FAIL_COLOR+"One or more of your test cases for POST() do "
+                  "not seem to be testing the contents of the response.\n")
 
         if len(test_functions_for_post) >= 2 and COUNT_POST_METHOD_TEST_FOR_INFERENCE_RESULT < 2:
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
             WARNING_COUNT += 1
-            print(FAIL_COLOR+"You do not seem to have TWO separate test cases, one for each possible prediction that your model can make.")
+            print(FAIL_COLOR+"You do not seem to have TWO separate test cases, "
+                  "one for each possible prediction that your model can make.")
 
 
 
@@ -147,13 +154,21 @@ def run_sanity_check(test_dir):
     if SANITY_TEST_PASSING:
         print(OK_COLOR+"Your test cases look good!")
     
-    print(WARN_COLOR+"This is a heuristic based sanity testing and cannot guarantee the correctness of your code.")
-    print(WARN_COLOR+"You should still check your work against the rubric to ensure you meet the criteria.")
+    print(WARN_COLOR+"This is a heuristic based sanity testing and "
+          "cannot guarantee the correctness of your code.")
+    print(WARN_COLOR+"You should still check your work against the "
+          "rubric to ensure you meet the criteria.")
 
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('test_dir',metavar='test_dir',nargs='?',default='tests',help='Name of the directory that has test files.')
+    parser.add_argument(
+        'test_dir',
+        metavar='test_dir',
+        nargs='?',
+        default='tests',
+        help='Name of the directory that has test files.'
+        )
     args = parser.parse_args()
     run_sanity_check(args.test_dir)

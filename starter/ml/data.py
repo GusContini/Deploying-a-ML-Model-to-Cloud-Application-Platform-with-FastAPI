@@ -1,8 +1,9 @@
+''' Docstring
+'''
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import pandas as pd
 
- 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
 ):

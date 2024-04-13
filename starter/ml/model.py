@@ -1,8 +1,8 @@
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import fbeta_score, precision_score, recall_score
+''' Docstring
+'''
 import pickle
 import json
-
+from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train, model):
@@ -50,9 +50,8 @@ def compute_model_metrics(y, preds):
         "fbeta": fbeta
     }
 
-    with open('model_metrics.json', 'w') as f:
+    with open('model_metrics.json', 'w', encoding='utf-8') as f:
         json.dump(metrics, f, indent=4)
-        
     return precision, recall, fbeta
 
 

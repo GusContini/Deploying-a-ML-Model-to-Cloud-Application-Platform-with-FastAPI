@@ -1,14 +1,15 @@
-import pandas as pd
-import sys
-sys.path.append('ml')  # Adiciona o subdiretório X2 ao caminho de busca de módulos
-import model
-import data
+''' Docstring
+'''
 import json
+import pandas as pd
+from starter.ml import data, model
 
 def compute_performance_slices(feature):
-
+    ''' Docstring
+    '''
     test = pd.read_csv(
-        '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-Platform-with-FastAPI/data/test.csv'
+        '/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application'
+        '-Platform-with-FastAPI/data/test.csv'
         )
 
     # Get unique values of the specified feature
@@ -52,10 +53,10 @@ def compute_performance_slices(feature):
         # Store performance metrics in the dictionary
         metrics_dict[value] = {'precision': precision, 'recall': recall, 'fbeta': fbeta}
 
-        with open('data_slice_model_metrics.json', 'w') as f:
+        with open('data_slice_model_metrics.json', 'w', encoding='utf-8') as f:
             json.dump(metrics_dict, f, indent=4)
 
-        with open('slice_output.txt', 'w') as f:
+        with open('slice_output.txt', 'w', encoding='utf-8') as f:
             f.write(str(metrics_dict))
 
     return metrics_dict
