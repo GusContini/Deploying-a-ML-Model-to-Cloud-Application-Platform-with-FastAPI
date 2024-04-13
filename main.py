@@ -38,7 +38,7 @@ class InputData(BaseModel):
 # Load trained model
 with open(os.path.join(
     os.path.dirname(__file__), 'starter', 'trained_model.pkl'),
-    'rb'
+        'rb'
     ) as file:
     trained_model, encoder, lb = pickle.load(file)
 
@@ -62,11 +62,11 @@ def perform_inference(input_data):
 
     X_processed, _, _, _ = data.process_data(
         input_dict,
-        categorical_features = cat_features,
-        label = None,
-        training = False,
-        encoder = encoder,
-        lb = lb
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
     predictions = model.inference(trained_model, X_processed)
     return predictions
@@ -78,13 +78,14 @@ async def read_root():
     '''
     return {'message': 'Welcome to the ML Model Inference API!'}
 
+
 @app.post('/predict')
 async def predict_income(input_data: InputData):
     ''' Docstring
     '''
     try:
         predictions = perform_inference(input_data)
-        if predictions==0:
+        if predictions == 0:
             pred_label = '<= 50K'
         else:
             pred_label = '> 50K'

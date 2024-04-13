@@ -3,6 +3,7 @@
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
+
 def split_data():
     ''' Docstring
     '''
@@ -24,6 +25,7 @@ def split_data():
                  '-Platform-with-FastAPI/data/train.csv')
     test.to_csv('/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application'
                 '-Platform-with-FastAPI/data/test.csv')
+
 
 if __name__ == '__main__':
     split_data()

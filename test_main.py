@@ -1,11 +1,10 @@
 ''' Docstring
 '''
-# test_main.py
-#import pytest
 import requests
 
 # Base URL of the FastAPI app
 BASE_URL = "http://127.0.0.1:8000"
+
 
 # Test GET request
 def test_get_root():
@@ -14,6 +13,7 @@ def test_get_root():
     response = requests.get(BASE_URL, timeout=30)
     assert response.status_code == 200
     assert response.json() == {'message': 'Welcome to the ML Model Inference API!'}
+
 
 # Test POST request for prediction where prediction is 0
 def test_predict_income_0():
@@ -39,6 +39,7 @@ def test_predict_income_0():
     assert response.status_code == 200
     assert response.json()["predictions"] == "[0]<= 50K"
 
+
 # Test POST request for prediction where prediction is 1
 def test_predict_income_1():
     ''' Docstring
@@ -62,6 +63,7 @@ def test_predict_income_1():
     response = requests.post(BASE_URL + "/predict", json=payload, timeout=30)
     assert response.status_code == 200
     assert response.json()["predictions"] == "[1]> 50K"
+
 
 # Run tests
 if __name__ == '__main__':
