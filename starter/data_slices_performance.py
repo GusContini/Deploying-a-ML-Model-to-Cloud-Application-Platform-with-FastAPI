@@ -30,8 +30,8 @@ def compute_performance_slices(feature):
         "native-country",
         ]
 
-    model_path = ('/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-Application-'
-                  'Platform-with-FastAPI/starter/trained_model.pkl')
+    model_path = ('/home/chafund/GIT/Deploying-a-ML-Model-to-Cloud-App'
+                  'lication-Platform-with-FastAPI/starter/trained_model.pkl')
 
     trained_model, trained_encoder, trained_lb = model.import_model(model_path)
 

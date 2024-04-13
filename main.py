@@ -40,7 +40,7 @@ with open(
     os.path.join(
         os.path.dirname(__file__), 'starter', 'trained_model.pkl'
         ), 'rb'
-    ) as file:
+) as file:
     trained_model, encoder, lb = pickle.load(file)
 
 cat_features = [
