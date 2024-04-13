@@ -36,9 +36,10 @@ class InputData(BaseModel):
 
 
 # Load trained model
-with open(os.path.join(
-    os.path.dirname(__file__), 'starter', 'trained_model.pkl'),
-        'rb'
+with open(
+    os.path.join(
+        os.path.dirname(__file__), 'starter', 'trained_model.pkl'
+        ), 'rb'
     ) as file:
     trained_model, encoder, lb = pickle.load(file)
 

@@ -12,7 +12,8 @@ def test_get_root():
     '''
     response = requests.get(BASE_URL, timeout=30)
     assert response.status_code == 200
-    assert response.json() == {'message': 'Welcome to the ML Model Inference API!'}
+    assert response.json() == {'message': 'Welcome to the ML Model '
+                               'Inference API!'}
 
 
 # Test POST request for prediction where prediction is 0
