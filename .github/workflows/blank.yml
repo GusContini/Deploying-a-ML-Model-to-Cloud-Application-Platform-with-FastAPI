@@ -41,6 +41,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest flake8
           pip install -r starter/requirements.txt
+
+      - name: Start FastAPI server
+        run: uvicorn main:app --reload &
+
+      - name: Wait for server to start
+        run: sleep 15  # Adjust the sleep time as needed
       
       - name: Run Flake8
         run: flake8
