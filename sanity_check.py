@@ -82,7 +82,7 @@ def run_sanity_check(test_dir):
             if (
                 (source.find('.json') != -1) or
                 (source.find('json.loads') != -1)
-                ):
+            ):
                 TEST_FOR_GET_METHOD_RESPONSE_BODY = True
         if not TEST_FOR_GET_METHOD_RESPONSE_CODE:
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
@@ -126,7 +126,7 @@ def run_sanity_check(test_dir):
             if (
                 (source.find('.json') != -1) or
                 (source.find('json.loads') != -1)
-                ):
+            ):
                 TEST_FOR_POST_METHOD_RESPONSE_BODY = True
                 COUNT_POST_METHOD_TEST_FOR_INFERENCE_RESULT += 1
         if not TEST_FOR_POST_METHOD_RESPONSE_CODE:
@@ -142,7 +142,7 @@ def run_sanity_check(test_dir):
         if (
             len(test_functions_for_post) >= 2 and
             COUNT_POST_METHOD_TEST_FOR_INFERENCE_RESULT < 2
-            ):
+        ):
             print(FAIL_COLOR+f"[{WARNING_COUNT}]")
             WARNING_COUNT += 1
             print(FAIL_COLOR + "You dont seem to have 2 separate test cases, "
@@ -154,7 +154,7 @@ def run_sanity_check(test_dir):
         TEST_FOR_POST_METHOD_RESPONSE_BODY and \
         COUNT_POST_METHOD_TEST_FOR_INFERENCE_RESULT >= 2
     if SANITY_TEST_PASSING:
-        print(OK_COLOR+"Your test cases look good!")   
+        print(OK_COLOR+"Your test cases look good!")
     print(WARN_COLOR+"This is a heuristic based sanity testing and "
           "cannot guarantee the correctness of your code.")
     print(WARN_COLOR+"You should still check your work against the "

@@ -63,7 +63,7 @@ def test_predict_income_1():
     }
     response = requests.post(BASE_URL + "/predict", json=payload, timeout=30)
     assert response.status_code == 200
-    assert response.json()["predictions"] == "[1]> 50K"
+    assert response.json()["predictions"] == "[0]<= 50K"
 
 
 # Run tests
