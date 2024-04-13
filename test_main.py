@@ -10,7 +10,7 @@ BASE_URL = "http://127.0.0.1:8000"
 def test_get_root():
     ''' Docstring
     '''
-    response = requests.get(BASE_URL, timeout=30)
+    response = requests.get(BASE_URL)
     assert response.status_code == 200
     assert response.json() == {'message': 'Welcome to the ML Model '
                                'Inference API!'}
@@ -36,7 +36,7 @@ def test_predict_income_0():
         "hours-per-week": 40,
         "native-country": "United-States"
     }
-    response = requests.post(BASE_URL + "/predict", json=payload, timeout=30)
+    response = requests.post(BASE_URL + "/predict", json=payload)
     assert response.status_code == 200
     assert response.json()["predictions"] == "[0]<= 50K"
 
@@ -61,7 +61,7 @@ def test_predict_income_1():
         "hours-per-week": 55,
         "native-country": "United-States"
     }
-    response = requests.post(BASE_URL + "/predict", json=payload, timeout=30)
+    response = requests.post(BASE_URL + "/predict", json=payload)
     assert response.status_code == 200
     assert response.json()["predictions"] == "[0]<= 50K"
 
