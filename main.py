@@ -80,6 +80,12 @@ async def read_root():
     return {'message': 'Welcome to the ML Model Inference API!'}
 
 
+# Allow HEAD method for the root URL
+@app.head("/")
+async def head_root():
+    return
+
+
 @app.post('/predict')
 async def predict_income(input_data: InputData):
     ''' Docstring
